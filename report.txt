@@ -1,0 +1,17 @@
+In the original Round Robin approach, no matter what the priority of the process is, each process gets a fixed quanta of time after which the CPU is allocated to the next process. The allocation of the CPU to the next process is solely on FCFS basis and not on priority.
+
+In the Priority based approach we implemented, it works exactly like the Round Robin approach except that when a process has finished execution in it's time quanta and a new process is to be allocated to the CPU, the Scheduler allocates the CPU to the process with highest priority(lowest number) and does not select the process on FCFS policy.
+
+This ensures that the process with highest priority indeed finishes it's execution first, then the one with the next highest priority and so on.
+
+Advantage of this priority based approach is some processes like realtime processes may require to be completed within a hard deadline. In such situations, these realtime processes can be accordingly assigned a priority based on how early the deadline is(earlier the deadline lower the priority value). This would ensure that the CPU serves that process first.
+
+Example:
+Run the following command:
+test &; test &; test &; test &;
+
+Priority scheduling:
+The test process does some wasteful computation for around 30 odd seconds. Once we start them on background we do ps multiple times and see that each of the test processes with unique pids are run for a fixed quanta of time and then a context switch occurs to give CPU to the next test process because all of them have the same priority initally and the CPU is allocated solely on FCFS basis. Now when we do a set_priority for one of the processes, we see that, that process with highest priority(lowest value) keeps on running until it finishes execution.
+
+Round Robin Scheduling:
+The test process does some wasteful computation for around 30 odd seconds. Once we start them on background we do ps multiple times and see that each of the test processes with unique pids are run for a fixed quanta of time and then a context switch occurs to give CPU to the next test process solely based on FCFS policy.
